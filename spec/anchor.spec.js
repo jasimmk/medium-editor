@@ -124,6 +124,41 @@ describe('Anchor Button TestCase', function () {
             editor.createLink(input);
             expect(editor.elements[0].querySelector('a').target).toBe('_blank');
         });
+        it('should create a button when user selects this option and presses enter', function () {
+            spyOn(MediumEditor.prototype, 'createLink').and.callThrough();
+            var editor = new MediumEditor('.editor', {
+                anchorButton: true,
+                anchorButtonClass: 'btn btn-default'
+            }),
+                save,
+                input,
+                button;
+
+            selectElementContents(editor.elements[0]);
+            save = editor.toolbar.querySelector('[data-element="a"]');
+            fireEvent(save, 'click');
+
+            input = editor.anchorForm.querySelector('input.medium-editor-toolbar-anchor-input');
+            input.value = 'test';
+
+            button = editor.anchorForm.querySelector('input.medium-editor-toolbar-anchor-button');
+            button.setAttribute('type', 'checkbox');
+            button.checked = true;
+
+            fireEvent(input, 'keyup', 13);
+            expect(editor.createLink).toHaveBeenCalledWith(input, '_self', 'btn btn-default');
+        });
+        it('should set class when respective option is set to true and checkbox is checked', function () {
+            var editor = new MediumEditor('.editor'),
+                input = editor.anchorForm.querySelector('input');
+
+            selectElementContents(editor.elements[0]);
+            input.value = 'http://test.com';
+
+            editor.createLink(input, '_blank', 'btn btn-default');
+            expect(editor.elements[0].querySelector('a').classList.contains('btn')).toBe(true);
+            expect(editor.elements[0].querySelector('a').classList.contains('btn-default')).toBe(true);
+        });
     });
 
     describe('Cancel', function () {
@@ -135,7 +170,7 @@ describe('Anchor Button TestCase', function () {
 
             selectElementContents(editor.elements[0]);
             button = editor.toolbar.querySelector('[data-element="a"]');
-            cancel = editor.anchorForm.querySelector('a');
+            cancel = editor.anchorForm.querySelector('a.medium-editor-toobar-anchor-close');
             fireEvent(button, 'click');
             expect(editor.anchorForm.style.display).toBe('block');
             fireEvent(cancel, 'click');

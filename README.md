@@ -6,7 +6,11 @@ Since I always had problems with bloated editors and I loved the simplicity of m
 
 MediumEditor has been written using vanilla JavaScript, no additional frameworks required.
 
-Tested on Google Chrome, Firefox and IE9+.
+## Browser Support
+
+![IE](https://cloud.githubusercontent.com/assets/398893/3528325/20373e76-078e-11e4-8e3a-1cb86cf506f0.png) | ![Chrome](https://cloud.githubusercontent.com/assets/398893/3528328/23bc7bc4-078e-11e4-8752-ba2809bf5cce.png) | ![Firefox](https://cloud.githubusercontent.com/assets/398893/3528329/26283ab0-078e-11e4-84d4-db2cf1009953.png) | ![Opera](https://cloud.githubusercontent.com/assets/398893/3528330/27ec9fa8-078e-11e4-95cb-709fd11dac16.png) | ![Safari](https://cloud.githubusercontent.com/assets/398893/3528331/29df8618-078e-11e4-8e3e-ed8ac738693f.png)
+--- | --- | --- | --- | --- |
+IE 9+ ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ |
 
 [![NPM info](https://nodei.co/npm/medium-editor.png?downloads=true)](https://nodei.co/npm/medium-editor.png?downloads=true)
 
@@ -69,6 +73,8 @@ If you want to support IE9, you will need to use a classList pollyfill, like Eli
 * __placeholder__: Defines the default placeholder for empty contenteditables. You can overwrite it by setting a data-placeholder attribute on your elements. Default: 'Type your text'
 * __secondHeader__: HTML tag to be used as second header. Default: h4
 * __targetBlank__: enables/disables target="\_blank" for anchor tags. Default: false
+* __anchorButton__: enables/disables adding class __anchorButtonClass__ to anchor tags. Default: false
+* __anchorButtonClass__: class to add to anchor tags, when __anchorButton__ is set to true. Default: btn
 * __extensions__: extension to use (see _Extensions_) for more. Default: {}
 * __activeButtonClass__: CSS class added to active buttons. Default: 'medium-editor-button-active'
 * __firstButtonClass__: CSS class added to the first button. Default: 'medium-editor-button-first'
@@ -99,6 +105,10 @@ Medium Editor, by default, will show only the buttons listed above to avoid a hu
 * __unorderedlist__
 * __orderedlist__
 * __pre__
+* __justifyLeft__
+* __justifyFull__
+* __justifyCenter__
+* __justifyRight__
 * __image__ (this simply converts selected text to an image tag)
 * __indent__ (moves the selected text up one level)
 * __outdent__ (moves the selected text down one level)
@@ -128,6 +138,11 @@ $('.editable').on('input', function() {
 This is handy when you need to capture modifications other thats outside of `key up`'s scope like clicking on toolbar buttons.
 
 `input` is supported by Chrome, Firefox, IE9 and other modern browsers. If you want to read more or support older browsers, check [Listening to events of a contenteditable HTML element](http://stackoverflow.com/questions/7802784/listening-to-events-of-a-contenteditable-html-element/7804973#7804973) and [Detect changes in the DOM](http://stackoverflow.com/questions/3219758/detect-changes-in-the-dom)
+
+## MediumButton
+
+Patrick Stillhar developed a new and improved way to add buttons to our toolbar. Check it out at:
+[https://stillhart.biz/project/MediumButton/](https://stillhart.biz/project/MediumButton/)
 
 ## Extensions
 
